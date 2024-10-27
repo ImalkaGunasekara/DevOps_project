@@ -8,7 +8,6 @@ spec:
   ports:
     - port: 8080
       targetPort: 80
-      nodePort: 30007    # Fixed port between 30000-32767
   selector:
     app: mrdevops
-  type: NodePort        # Changed from LoadBalancer to NodePort
+  type: LoadBalancer
