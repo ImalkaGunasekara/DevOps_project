@@ -17,8 +17,8 @@ WORKDIR /var/www/html/
 
 # Unzip the downloaded file and organize the content
 RUN unzip neogym.zip && \
-    cp -rvf neogym/* . && \
-    rm -rf neogym neogym.zip
+    cp -rvf neogym-html/* . && \
+    rm -rf neogym-html neogym.zip
 
 # Set the default command to start Apache in the foreground
 CMD ["apachectl", "-D", "FOREGROUND"]
