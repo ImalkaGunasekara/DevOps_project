@@ -1,16 +1,6 @@
 ---
 - hosts: all
   tasks:
-    - name: Ensure .kube directory exists
-      file:
-        path: ~/.kube
-        state: directory
-        mode: '0755'
-
-    - name: Get Minikube context
-      command: minikube kubectl -- config view --raw
-      register: minikube_config
-
     - name: delete old deployment
       command: minikube kubectl -- delete -f /home/ubuntu/Deployment.yml
       ignore_errors: yes
