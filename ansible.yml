@@ -1,9 +1,8 @@
----
 - hosts: all
   tasks:
     - name: delete old deployment
       command: minikube kubectl -- delete -f /home/ubuntu/Deployment.yml
-      ignore_errors: yes
+      ignore_errors: yes #This is just here so that if nothing is here to be deleted, the error will be neglected
       
     - name: delete old service
       command: minikube kubectl -- delete -f /home/ubuntu/Service.yml
