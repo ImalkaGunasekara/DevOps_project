@@ -1,16 +1,7 @@
 - hosts: all
   become: true
   tasks: 
-     - name: delete old deployment
-       command: kubectl delete -f /home/ubuntu/Deployment.yml --insecure-skip-tls-verify=true
-       ignore_errors: yes
-
-     - name: delete old service
-       command: kubectl delete -f /home/ubuntu/Service.yml --insecure-skip-tls-verify=true
-       ignore_errors: yes
-
      - name: create new deployment
-       command: kubectl apply -f /home/ubuntu/Deployment.yml --insecure-skip-tls-verify=true
-
+       command: kubectl apply -f /home/ubuntu/Deployment.yml
      - name: create new service
-       command: kubectl apply -f /home/ubuntu/Service.yml --insecure-skip-tls-verify=true
+       command: kubectl apply -f /home/ubuntu/Service.yml
