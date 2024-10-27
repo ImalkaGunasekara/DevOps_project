@@ -1,7 +1,26 @@
+---
 - hosts: all
-  become: true
-  tasks: 
-     - name: create new deployment
-       command: kubectl apply -f /home/ubuntu/Deployment.yml
-     - name: create new service
-       command: kubectl apply -f /home/ubuntu/Service.yml
+  tasks:
+    - name: Ensure .kube directory exists
+      file:
+        path: ~/.kube
+        state: directory
+        mode: '0755'
+
+    - name: Get Minikube context
+      command: minikube kubectl -- config view --raw
+      register: minikube_config
+
+    - name: delete old deployment
+      command: minikube kubectl -- delete -f /home/ubuntu/Deployment.yml
+      ignore_errors: yes
+      
+    - name: delete old service
+      command: minikube kubectl -- delete -f /home/ubuntu/Service.yml
+      ignore_errors: yes
+      
+    - name: create new deployment
+      command: minikube kubectl -- apply -f /home/ubuntu/Deployment.yml
+      
+    - name: create new service
+      command: minikube kubectl -- apply -f /home/ubuntu/Service.yml
